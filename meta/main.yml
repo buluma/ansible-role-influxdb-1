@@ -1,9 +1,9 @@
 ---
 galaxy_info:
   role_name: influxdb
-  namespace: boutetnico
-  author: Nicolas Boutet
-  description: Install and configure InfluxDB.
+  namespace: buluma
+  author: Michael Buluma
+  description: Install and configure InfluxDB 2.0 using Ansible.
   license: MIT
   min_ansible_version: 2.7
   platforms:
