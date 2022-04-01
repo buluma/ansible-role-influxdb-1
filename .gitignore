@@ -1,3 +1,6 @@
-__pycache__
-*.pyc
+.molecule
+*.log
+*.swp
+.tox
 .cache
+.DS_Store
