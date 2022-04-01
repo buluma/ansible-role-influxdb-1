@@ -1,6 +1,6 @@
 # [influxdb-1](#influxdb-1)
 
-Install and configure InfluxDB.
+Install and configure InfluxDB 2.0 using Ansible.
 
 |GitHub|GitLab|Quality|Downloads|Version|Issues|Pull Requests|
 |------|------|-------|---------|-------|------|-------------|
@@ -14,7 +14,7 @@ This example is taken from `molecule/default/converge.yml` and is tested on each
 - name: Converge
   hosts: all
   roles:
-    - role: buluma.influxdb
+    - role: boutetnico.influxdb
 
       influxdb_orgs:
         - name: main-org
@@ -119,8 +119,12 @@ This role has been tested on these [container images](https://hub.docker.com/u/b
 
 |container|tags|
 |---------|----|
-|ubuntu|bionic, focal|
-|debian|bullseye|
+|amazon|Candidate|
+|el|7, 8|
+|debian|all|
+|fedora|all|
+|opensuse|all|
+|ubuntu|all|
 
 The minimum version of Ansible required is 2.7, tests have been done to:
 
@@ -138,4 +142,4 @@ MIT
 
 ## [Author Information](#author-information)
 
-[Nicolas Boutet](https://buluma.github.io/)
+[Michael Buluma](https://buluma.github.io/)
