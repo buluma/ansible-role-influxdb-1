@@ -14,7 +14,7 @@ This example is taken from `molecule/default/converge.yml` and is tested on each
 - name: Converge
   hosts: all
   roles:
-    - role: boutetnico.influxdb
+    - role: buluma.influxdb
 
       influxdb_orgs:
         - name: main-org
@@ -120,7 +120,7 @@ This role has been tested on these [container images](https://hub.docker.com/u/b
 |container|tags|
 |---------|----|
 |ubuntu|bionic, focal|
-|debian|bullseye, buster|
+|debian|bullseye|
 
 The minimum version of Ansible required is 2.7, tests have been done to:
 
