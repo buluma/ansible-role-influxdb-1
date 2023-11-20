@@ -1,92 +1,152 @@
-[![tests](https://github.com/boutetnico/ansible-role-influxdb/workflows/Test%20ansible%20role/badge.svg)](https://github.com/boutetnico/ansible-role-influxdb/actions?query=workflow%3A%22Test+ansible+role%22)
-[![Ansible Galaxy](https://img.shields.io/badge/galaxy-boutetnico.influxdb-blue.svg)](https://galaxy.ansible.com/boutetnico/influxdb)
+# [Ansible role influxdb-1](#influxdb-1)
+
+Install and configure InfluxDB.
+
+|GitHub|GitLab|Downloads|Version|Issues|Pull Requests|
+|------|------|-------|-------|------|-------------|
+|[![github](https://github.com/buluma/ansible-role-influxdb-1/actions/workflows/molecule.yml/badge.svg)](https://github.com/buluma/ansible-role-influxdb-1/actions/workflows/molecule.yml)|[![gitlab](https://gitlab.com/shadowwalker/ansible-role-influxdb-1/badges/master/pipeline.svg)](https://gitlab.com/shadowwalker/ansible-role-influxdb-1)|[![downloads](https://img.shields.io/ansible/role/d/)](https://galaxy.ansible.com/buluma/influxdb-1)|[![Version](https://img.shields.io/github/release/buluma/ansible-role-influxdb-1.svg)](https://github.com/buluma/ansible-role-influxdb-1/releases/)|[![Issues](https://img.shields.io/github/issues/buluma/ansible-role-influxdb-1.svg)](https://github.com/buluma/ansible-role-influxdb-1/issues/)|[![PullRequests](https://img.shields.io/github/issues-pr-closed-raw/buluma/ansible-role-influxdb-1.svg)](https://github.com/buluma/ansible-role-influxdb-1/pulls/)|
+
+## [Example Playbook](#example-playbook)
+
+This example is taken from [`molecule/default/converge.yml`](https://github.com/buluma/ansible-role-influxdb-1/blob/master/molecule/default/converge.yml) and is tested on each push, pull request and release.
+
+```yaml
+---
+- name: Converge
+  hosts: all
+  roles:
+    - role: boutetnico.influxdb
+
+      influxdb_orgs:
+        - name: main-org
+          description: Main organization
+        - name: guest-org
+
+      influxdb_users:
+        - name: admin01
+          org: main-org
+          password: secretPassword
+        - name: guest01
+          org: guest-org
+          password: secretPassword
+
+      influxdb_buckets:
+        - name: bucket01
+          description: First bucket
+          org: main-org
+          retention: 1d
+        - name: bucket02
+          org: main-org
+```
+
+Also see a [full explanation and example](https://buluma.github.io/how-to-use-these-roles.html) on how to use these roles.
+
+## [Role Variables](#role-variables)
+
+The default values for the variables are set in [`defaults/main.yml`](https://github.com/buluma/ansible-role-influxdb-1/blob/master/defaults/main.yml):
+
+```yaml
+---
+influxdb_dependencies:
+  - apt-transport-https
+  - curl
+  - gnupg
+
+influxdb_packages:
+  - influxdb2
+  - influxdb2-cli
+
+influxdb_package_state: present
+
+influxdb_config_path: /etc/influxdb
+influxdb_bolt_path: /var/lib/influxdb/influxd.bolt
+influxdb_engine_path: /var/lib/influxdb/engine
+
+influxdb_host: http://localhost:8086
+
+influxdb_config: {}
+#  http-bind-address: 0.0.0.0:8086
+#  reporting-disabled: true
+
+influxdb_primary_org: example-org
+influxdb_primary_bucket: example-bucket
+influxdb_primary_username: example-user
+influxdb_primary_password: ExAmPl3PA55W0rD
+
+# Set your root token for admin user
+influxdb_admin_token: EXAMPLE-TOKEN
+
+influxdb_orgs: []
+#  - name: main-org
+#    description: Main organization
+#  - name: guest-org
+
+influxdb_users: []
+#  - name: admin01
+#    org: main-org
+#    password: secretPassword
+#  - name: guest01
+#    org: guest-org
+#    password: secretPassword
+
+influxdb_buckets: []
+#  - name: bucket01
+#    description: First bucket
+#    org: main-org
+#    retention: 1d
+#  - name: bucket02
+#    description: Second bucket
+#    org: main-org
+
+influxdb_service_enabled: true
+
+influxdb_service_state: started
+```
+
+## [Requirements](#requirements)
+
+- pip packages listed in [requirements.txt](https://github.com/buluma/ansible-role-influxdb-1/blob/master/requirements.txt).
 
 
-ansible-role-influxdb
-=====================
+## [Context](#context)
 
-This role installs and configures [InfluxDB](https://docs.influxdata.com/influxdb/v2.0/).
+This role is a part of many compatible roles. Have a look at [the documentation of these roles](https://buluma.github.io/) for further information.
 
-Requirements
-------------
+Here is an overview of related roles:
 
-Ansible 2.7 or newer.
+![dependencies](https://raw.githubusercontent.com/buluma/ansible-role-influxdb-1/png/requirements.png "Dependencies")
 
-Supported Platforms
--------------------
+## [Compatibility](#compatibility)
 
-- [Debian - 10 (Buster)](https://wiki.debian.org/DebianBuster)
-- [Debian - 11 (Bullseye)](https://wiki.debian.org/DebianBullseye)
-- [Ubuntu - 18.04 (Bionic Beaver)](http://releases.ubuntu.com/18.04/)
-- [Ubuntu - 20.04 (Focal Fossa)](http://releases.ubuntu.com/20.04/)
+This role has been tested on these [container images](https://hub.docker.com/u/buluma):
 
-Role Variables
---------------
+|container|tags|
+|---------|----|
+|[Ubuntu](https://hub.docker.com/repository/docker/buluma/ubuntu/general)|bionic, focal|
+|[Debian](https://hub.docker.com/repository/docker/buluma/debian/general)|bullseye, buster|
 
-| Variable                  | Required | Default                            | Choices   | Comments                     |
-|---------------------------|----------|------------------------------------|-----------|------------------------------|
-| influxdb_dependencies     | yes      | `[apt-transport-https,curl,gnupg]` | list      |                              |
-| influxdb_package_state    | yes      | `present`                          | string    | Use `latest` to upgrade.     |
-| influxdb_host             | yes      | `http://localhost:8086`            | string    |                              |
-| influxdb_config_path      | yes      | `/etc/influxdb`                    | string    |                              |
-| influxdb_bolt_path        | yes      | `/var/lib/influxdb/influxd.bolt`   | string    |                              |
-| influxdb_engine_path      | yes      | `/var/lib/influxdb/engine`         | string    |                              |
-| influxdb_config           | yes      | `{}`                               | dict      | Main configuration object.   |
-| influxdb_primary_org      | yes      | `example-org`                      | string    | Primary organization name.   |
-| influxdb_primary_bucket   | yes      | `example-bucket`                   | string    | Primary bucket name.         |
-| influxdb_primary_username | yes      | `example-user`                     | string    | Primary username.            |
-| influxdb_primary_password | yes      | `ExAmPl3PA55W0rD`                  | string    | Password for primary user.   |
-| influxdb_admin_token      | yes      | `EXAMPLE-TOKEN`                    | string    | Token for admin user.        |
-| influxdb_orgs             | yes      | `[]`                               | list      | Additional orgs to create.   |
-| influxdb_users            | yes      | `[]`                               | list      | Additional users to create.  |
-| influxdb_buckets          | yes      | `[]`                               | list      | Additional buckets to create.|
-| influxdb_service_enabled  | yes      | `true`                             | bool      | Start InfluxDB at boot.      |
-| influxdb_service_state    | yes      | `started`                          | bool      | Use `started` or `stopped`.  |
+The minimum version of Ansible required is 2.7, tests have been done to:
 
-Dependencies
-------------
+- The previous version.
+- The current version.
+- The development version.
 
-None
+If you find issues, please register them in [GitHub](https://github.com/buluma/ansible-role-influxdb-1/issues)
 
-Example Playbook
-----------------
+## [Changelog](#changelog)
 
-    - hosts: all
-      roles:
-        - role: ansible-role-influxdb
+[Role History](https://github.com/buluma/ansible-role-influxdb-1/blob/master/CHANGELOG.md)
 
-          influxdb_orgs:
-            - name: main-org
-              description: Main organization
-            - name: guest-org
+## [License](#license)
 
-          influxdb_users:
-            - name: admin01
-              org: main-org
-              password: secretPassword
-            - name: guest01
-              org: guest-org
-              password: secretPassword
+[MIT](https://github.com/buluma/ansible-role-influxdb-1/blob/master/LICENSE).
 
-          influxdb_buckets:
-            - name: bucket01
-              description: First bucket
-              org: main-org
-              retention: 1d
-            - name: bucket02
-              org: main-org
+## [Author Information](#author-information)
 
-Testing
--------
+[Nicolas Boutet](https://buluma.github.io/)
 
-    molecule test --all
+Please consider [sponsoring me](https://github.com/sponsors/buluma).
 
-License
--------
+### [Special Thanks](#special-thanks)
 
-MIT
-
-Author Information
-------------------
-
-[@boutetnico](https://github.com/boutetnico)
+Template inspired by [Robert de Bock](https://github.com/robertdebock)
