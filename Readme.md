@@ -2,9 +2,9 @@
 
 Install and configure InfluxDB.
 
-|GitHub|GitLab|Downloads|Version|Issues|Pull Requests|
-|------|------|-------|-------|------|-------------|
-|[![github](https://github.com/buluma/ansible-role-influxdb-1/actions/workflows/molecule.yml/badge.svg)](https://github.com/buluma/ansible-role-influxdb-1/actions/workflows/molecule.yml)|[![gitlab](https://gitlab.com/shadowwalker/ansible-role-influxdb-1/badges/master/pipeline.svg)](https://gitlab.com/shadowwalker/ansible-role-influxdb-1)|[![downloads](https://img.shields.io/ansible/role/d/)](https://galaxy.ansible.com/buluma/influxdb-1)|[![Version](https://img.shields.io/github/release/buluma/ansible-role-influxdb-1.svg)](https://github.com/buluma/ansible-role-influxdb-1/releases/)|[![Issues](https://img.shields.io/github/issues/buluma/ansible-role-influxdb-1.svg)](https://github.com/buluma/ansible-role-influxdb-1/issues/)|[![PullRequests](https://img.shields.io/github/issues-pr-closed-raw/buluma/ansible-role-influxdb-1.svg)](https://github.com/buluma/ansible-role-influxdb-1/pulls/)|
+|GitHub|Version|Issues|Pull Requests|
+|------|-------|------|-------------|
+|[![github](https://github.com/buluma/ansible-role-influxdb-1/actions/workflows/molecule.yml/badge.svg)](https://github.com/buluma/ansible-role-influxdb-1/actions/workflows/molecule.yml)|[![Version](https://img.shields.io/github/release/buluma/ansible-role-influxdb-1.svg)](https://github.com/buluma/ansible-role-influxdb-1/releases/)|[![Issues](https://img.shields.io/github/issues/buluma/ansible-role-influxdb-1.svg)](https://github.com/buluma/ansible-role-influxdb-1/issues/)|[![PullRequests](https://img.shields.io/github/issues-pr-closed-raw/buluma/ansible-role-influxdb-1.svg)](https://github.com/buluma/ansible-role-influxdb-1/pulls/)|
 
 ## [Example Playbook](#example-playbook)
 
@@ -145,7 +145,6 @@ If you find issues, please register them in [GitHub](https://github.com/buluma/a
 
 [Nicolas Boutet](https://buluma.github.io/)
 
-Please consider [sponsoring me](https://github.com/sponsors/buluma).
 
 ### [Special Thanks](#special-thanks)
 
